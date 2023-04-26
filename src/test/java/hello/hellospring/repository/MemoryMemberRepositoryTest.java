@@ -11,6 +11,10 @@ import java.util.List;
 public class MemoryMemberRepositoryTest {
     MemoryMemberRepository repository = new MemoryMemberRepository();
 
+    @AfterEach
+    public void afterEach(){ //한 모듈 테스트 끝나고 저장소 비워줌
+        repository.clearStore();
+    }
     /**
      * 강의 회원 리포지토리 테스트 케이스 작성 12분부터 다시보기
      */
@@ -31,6 +35,8 @@ public class MemoryMemberRepositoryTest {
     /**
      * 테스트 순서는 보장 안됨.
      * 순서 의존적으로 테스트코드 짜면 안됨
+     * 한 모듈 테스트후 저장소 비워주도록 짜기
+     * @AfterEach 참고
      */
     @Test
     public void findByName(){
@@ -54,7 +60,7 @@ public class MemoryMemberRepositoryTest {
         repository.save(member1);
 
         Member member2 = new Member();
-        member2.setName("spring1");
+        member2.setName("spring2");
         repository.save(member2);
 
         List<Member> result = repository.findAll();
